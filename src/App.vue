@@ -1,5 +1,7 @@
 <template>
-    <input-name v-model="this.player"></input-name>
+    <input-name @updatePlayer="player=$event" v-if="!player"></input-name>
+    <div v-if="player">Player name: {{this.player}}</div>
+    <br>
     <player-list :playerList="this.passableList"></player-list>
 </template>
 
@@ -19,6 +21,7 @@ export default {
         }
     },
     computed : {
+        //list with player : guess pairs excluding this.player
         passableList() {
             if (this.player== "") {
                 return [];
