@@ -1,6 +1,6 @@
 # WhoAmI
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple Version of the guessing game Who am I. 
 
 ## Recommended IDE Setup
 
