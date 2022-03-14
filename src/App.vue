@@ -16,12 +16,13 @@ export default {
 
     data() {
         return {
-            playerList : [{ "name" :"Hans", "guess" : "Obama"}, { "name" :"Karl", "guess" : "Kafka"}, { "name" :"Jürgen", "guess" : "Moses"}, { "name" :"Peter", "guess" : "Benjamin Blümchen"}, { "name" :"Chris", "guess" : "Putin"}],
-            player: ""
+            playerList : [],
+            player: "",
+            backend: "http://localhost:8001"
         }
     },
     computed : {
-        //list with player : guess pairs excluding this.player
+        //list with [player : guess] pairs excluding this.player
         passableList() {
             if (this.player== "") {
                 return [];
@@ -30,7 +31,24 @@ export default {
         }
     },
     methods : {
-       
+        //fetch the players list from server and update value in model
+        updateList() {
+           fetch(this.backend +"/players")
+           .then( res => {
+               if (!res.ok) {
+                   throw new Error("error fetching players "+ res.status );
+               }
+               return res.json()
+           })
+           .then( json => {
+               this.playerList = json
+           })
+           .catch( error => console.error(error))
+       }
+    },
+    //on creation. update the players list
+    created(){
+        this.updateList();
     }
 }
 </script>
