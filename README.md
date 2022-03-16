@@ -1,6 +1,8 @@
 # WhoAmI
 
 A simple Version of the guessing game Who am I. 
+indepth explanation:
+https://en.wikipedia.org/wiki/Twenty_questions
 
 ## Project Setup
 
