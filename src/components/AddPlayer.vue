@@ -20,7 +20,6 @@ import { ref } from "@vue/reactivity";
             console.log("can't add without name and guess");
             return
         }
-        console.log(name.value, guess.value);
         emit("add", {"name": name.value, "guess": guess.value})
     }
 </script>

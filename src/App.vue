@@ -44,10 +44,29 @@ export default {
                 console.error("error fetching players");
             }
        },
-       //add a player to the list
-       //todo: push player to server instead
-       handleAdd(player) {
-           this.playerList.push(player)
+       //push a player to the server
+        async handleAdd(player) {
+            //define options for the request
+            let options = {
+                method: "PUT",
+                headers: {
+                   "Content-Type": "application/json;charset=utf-8"
+                },
+                body: JSON.stringify(player)
+            }
+
+            //send request and check for errors
+            let response
+            try {
+                response = await fetch(this.backend+"/player", options);
+            } catch (error) {
+                console.error("PUT request failed: " + error);
+            }
+            
+            //update player list if the request is good
+            if (await response.status==200) {
+                this.updateList();
+            }
        } 
     },
     //on creation. update the players list
